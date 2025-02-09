@@ -15,6 +15,7 @@ const trackVariants = cva("relative grow overflow-hidden rounded-full", {
     variant: {
       primary: "bg-primary/20",
       secondary: "bg-secondary/20",
+      zinc: "bg-zinc-200",
     },
     defaultVariants: {
       orientation: "horizontal",
@@ -31,6 +32,7 @@ const rangeVariants = cva("absolute", {
     variant: {
       primary: "bg-primary",
       secondary: "bg-secondary",
+      zinc: "bg-zinc-700",
     },
     defaultVariants: {
       orientation: "horizontal",
@@ -39,7 +41,26 @@ const rangeVariants = cva("absolute", {
   },
 });
 
-interface SliderProps extends VariantProps<typeof trackVariants> {
+const thumbVariants = cva(
+  "block h-4 w-4 rounded-full border bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        primary: "border-primary/50",
+        secondary: "border-secondary/50",
+        zinc: "border-zinc-700 focus-visible:ring-zinc-500",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+    },
+  }
+);
+
+interface SliderProps
+  extends VariantProps<typeof trackVariants>,
+    VariantProps<typeof rangeVariants>,
+    VariantProps<typeof thumbVariants> {
   orientation?: "vertical" | "horizontal";
 }
 
@@ -68,7 +89,7 @@ const Slider = React.forwardRef<
           className={cn(rangeVariants({ orientation, variant }))}
         />
       </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+      <SliderPrimitive.Thumb className={thumbVariants({ variant })} />
     </SliderPrimitive.Root>
   )
 );
