@@ -15,7 +15,7 @@ const trackVariants = cva("relative grow overflow-hidden rounded-full", {
     variant: {
       primary: "bg-primary/20",
       secondary: "bg-secondary/20",
-      zinc: "bg-zinc-200",
+      zinc: "bg-zinc-300",
     },
     defaultVariants: {
       orientation: "horizontal",
@@ -32,7 +32,7 @@ const rangeVariants = cva("absolute", {
     variant: {
       primary: "bg-primary",
       secondary: "bg-secondary",
-      zinc: "bg-zinc-700",
+      zinc: "bg-zinc-400",
     },
     defaultVariants: {
       orientation: "horizontal",
@@ -48,7 +48,7 @@ const thumbVariants = cva(
       variant: {
         primary: "border-primary/50",
         secondary: "border-secondary/50",
-        zinc: "border-zinc-700 focus-visible:ring-zinc-500",
+        zinc: "border-green-700 focus-visible:ring-green-500 bg-green-500",
       },
     },
     defaultVariants: {
@@ -62,6 +62,7 @@ interface SliderProps
     VariantProps<typeof rangeVariants>,
     VariantProps<typeof thumbVariants> {
   orientation?: "vertical" | "horizontal";
+  title?: string;
 }
 
 const Slider = React.forwardRef<
@@ -69,28 +70,39 @@ const Slider = React.forwardRef<
   SliderProps & React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
 >(
   (
-    { className, orientation = "horizontal", variant = "primary", ...props },
+    {
+      className,
+      orientation = "horizontal",
+      variant = "primary",
+      title,
+      ...props
+    },
     ref
   ) => (
-    <SliderPrimitive.Root
-      ref={ref}
-      orientation={orientation}
-      className={cn(
-        "relative flex touch-none select-none items-center",
-        orientation === "vertical" ? "flex-col h-full w-4" : "w-full h-4",
-        className
-      )}
-      {...props}
-    >
-      <SliderPrimitive.Track
-        className={cn(trackVariants({ orientation, variant }))}
+    <div className="relative flex flex-row items-end w-8 justify-end">
+      <h3 className="absolute -rotate-90 left-3 origin-left whitespace-nowrap text-zinc-700 tracking-wider">
+        {title}
+      </h3>
+      <SliderPrimitive.Root
+        ref={ref}
+        orientation={orientation}
+        className={cn(
+          "relative flex touch-none select-none items-center",
+          orientation === "vertical" ? "flex-col h-full w-4" : "w-full h-4",
+          className
+        )}
+        {...props}
       >
-        <SliderPrimitive.Range
-          className={cn(rangeVariants({ orientation, variant }))}
-        />
-      </SliderPrimitive.Track>
-      <SliderPrimitive.Thumb className={thumbVariants({ variant })} />
-    </SliderPrimitive.Root>
+        <SliderPrimitive.Track
+          className={cn(trackVariants({ orientation, variant }))}
+        >
+          <SliderPrimitive.Range
+            className={cn(rangeVariants({ orientation, variant }))}
+          />
+        </SliderPrimitive.Track>
+        <SliderPrimitive.Thumb className={thumbVariants({ variant })} />
+      </SliderPrimitive.Root>
+    </div>
   )
 );
 Slider.displayName = SliderPrimitive.Root.displayName;

@@ -1,7 +1,13 @@
 import * as React from "react";
 import { SVGProps, memo } from "react";
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
-  <svg width={16} height={16} viewBox="0 0 40 40" fill="none" {...props}>
+  <svg
+    width={16}
+    height={16}
+    viewBox="0 0 40 40"
+    className="fill-current"
+    {...props}
+  >
     <g clipPath="url(#a)">
       <path
         className="stroke-current"
