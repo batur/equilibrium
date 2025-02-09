@@ -7,6 +7,9 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      bauhaus: "Bauhaus Regular",
+    },
     extend: {
       colors: {
         background: "var(--background)",

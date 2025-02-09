@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "Bauhaus Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Bauhaus Regular"),
+      url("./fonts/BauhausRegular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Bauhaus Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Bauhaus Italic"),
+      url("./fonts/BauhausItalic.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Bauhaus Bold";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Bauhaus Bold"), url("./fonts/BauhausBold.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Bauhaus Bold Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Bauhaus Bold Italic"),
+      url("./fonts/BauhausBoldItalic.woff") format("woff");
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -17,5 +50,5 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Bauhaus Regular", sans-serif;
 }
